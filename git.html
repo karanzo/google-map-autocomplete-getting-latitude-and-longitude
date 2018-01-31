@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Google Map Auto Complete API</title>
+</head>
+<body>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&signed&in=true&libraries=places"></script>
+
+<script type="text/javascript">
+google.maps.event.addDomListener(window, 'load', intilize);
+	function intilize(){
+		var autocomplete = new google.maps.places.Autocomplete(document.getElementById('txtautocomplete'));
+		google.maps.event.addListener(autocomplete, 'plac_changed', function() {
+		var places = autocomplete.getplace();
+		var location = "<b>location :</b>" + places.formatted_address + "<br/>";
+		location += "<b>lat :</b><input type='text' value=" + places.geometry.location.lat + "</input><br/>";
+		location += "<b>lng :</b>" + places.geometry.location.lng + "<br/>";
+		document.getElementById('lblresult').innerHTML = location
+		});
+	};
+</script>
+
+<span>Location:</span><input type="text" id="txtautocomplete" style="width: 200%" placeholder="Enter the address"><br><br>
+<label id="lblresult"></label>
+</body>
+</html> 
